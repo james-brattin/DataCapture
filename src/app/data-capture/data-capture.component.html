@@ -1,0 +1,41 @@
+<main>
+  <mat-tab-group>
+    <mat-tab label="Geodesc">
+        <button>Save</button>
+        <button>Undo</button>
+        <button>Repeat</button>
+        <button>Add samples</button>
+        <button (click)="validate()">Validate</button>
+        <button>Go to error</button>
+        <button (click)="getData()">Upload</button>
+        <button>Check in</button>
+        <button (click)="columnVisibility()">Column visibility</button>
+        <button>Move columns</button>
+        <button>Re-sort rows</button>
+        <button>Save display</button>
+        <button>Load display</button>
+        <button>Show legend</button>
+        <button (click)="swapHotData()">Load new data!</button>
+    </mat-tab>
+    <mat-tab label="General">
+      <p>
+        <button>Alignment</button>
+        <button>Wrap Text</button>
+        <button>Background Color</button>
+        <button>Zoom</button>
+        <button>Freeze Rows/Columns</button>
+        <button>Insert Function</button>
+      </p>
+    </mat-tab>
+  </mat-tab-group>
+    <br>
+    <hot-table
+      [hotId]="tableId"
+      [afterChange]="detectChanges"
+      [settings]="tableSettings"
+      [data]="dataset"></hot-table>
+      <br>
+      <!-- <div class="hot">
+        <hot-table [hotId]="id" [settings]="hotSettings"></hot-table>
+      </div> -->
+</main>
