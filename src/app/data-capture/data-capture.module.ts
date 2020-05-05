@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { DataCaptureRoutingModule } from './data-capture-routing.module';
 import { DataCaptureComponent } from './data-capture.component';
+import { PaleoComponent } from './paleo/paleo.component';
 
 
 @NgModule({
-  declarations: [DataCaptureComponent],
+  declarations: [DataCaptureComponent, PaleoComponent],
   imports: [
     CommonModule,
     SharedModule,

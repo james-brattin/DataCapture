@@ -1,35 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import Handsontable from 'handsontable';
-import { columns } from '../core/models/columns';
-import { dataset } from './services/mock-dataset';
 import { HotTableRegisterer } from '@handsontable/angular';
 
-// import { columns } from '../core/models/micropaleo-columns';
-// import { dataset } from './services/mock-micropaleo';
+import { columns } from '../../core/models/micropaleo-columns'
+import { dataset } from '../services/mock-micropaleo';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-data-capture',
-  templateUrl: './data-capture.component.html',
-  styleUrls: ['./data-capture.component.scss']
+  selector: 'app-paleo',
+  templateUrl: './paleo.component.html',
+  styleUrls: ['./paleo.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DataCaptureComponent implements OnInit {
+export class PaleoComponent implements OnInit {
   dataset = dataset;
-  private hotRegisterer = new HotTableRegisterer();
-  id = 'hotInstance';
-  hotSettings: Handsontable.GridSettings = {
-    data: Handsontable.helper.createSpreadsheetData(4, 4),
-    colHeaders: true
-  };
+  tableId = 'myTableInstance';
+  private myRegisterer = new HotTableRegisterer();
 
   constructor(private router: Router) {}
 
-  swapHotData() {
-    this.hotRegisterer.getInstance(this.id).loadData([['new', 'data']]);
-  }
-
-  tableId = 'myTableInstance';
-  private myRegisterer = new HotTableRegisterer();
   tableSettings: Handsontable.GridSettings = {
     // data: Handsontable.helper.createSpreadsheetData(151, 175),
     rowHeaders: true,
@@ -50,7 +39,7 @@ export class DataCaptureComponent implements OnInit {
     height: 750,
     width: 1870,
     autoWrapRow: true,
-    maxRows: 22000,
+    maxRows: 2200,
     manualRowResize: true,
     manualColumnResize: true,
     startRows: 5,
@@ -88,29 +77,24 @@ export class DataCaptureComponent implements OnInit {
     console.log(changes);
   };
 
-  validate() {
-    this.hotRegisterer.getInstance(this.tableId).validateRows([3, 4, 5], (valid) => {
-      if (valid) {
-        // ... code for validated rows
-      }
-    })
-    this.hotRegisterer.getInstance(this.tableId).validateColumns([3, 4, 5], (valid) => {
-      if (valid) {
-        // ... code for validated columns
-      }
-    })
-  }
+  // validate() {
+  //   this.hotRegisterer.getInstance(this.tableId).validateRows([3, 4, 5], (valid) => {
+  //     if (valid) {
+  //       // ... code for validated rows
+  //     }
+  //   })
+  //   this.hotRegisterer.getInstance(this.tableId).validateColumns([3, 4, 5], (valid) => {
+  //     if (valid) {
+  //       // ... code for validated columns
+  //     }
+  //   })
+  // }
 
   columnVisibility() {
   }
-  
-  getData() {
-    let data = this.hotRegisterer.getInstance(this.tableId).getData();
-    console.log('data is ' + JSON.stringify(data));
-  }
 
-  goToMicropaleo() {
-    this.router.navigateByUrl('/micropaleo');
+  goToGeneral() {
+    this.router.navigateByUrl('/data-capture');
   }
 }
 
