@@ -4,8 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { DataCaptureComponent } from './data-capture.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/project-template' },
-  { path: 'project-templates', component: DataCaptureComponent }
+  { path: '', pathMatch: 'full', redirectTo: '/data-capture' },
+  { path: 'data-capture', component: DataCaptureComponent }
 ];
 
 @NgModule({

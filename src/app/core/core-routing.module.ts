@@ -3,12 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { IodpLoginModule, IodpLoginComponent, AuthGuard } from 'iodplogin';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/login' },
-  { path: 'login', component: IodpLoginComponent },
+  // { path: '', pathMatch: 'full', redirectTo: '/template-lists/project-template' },
+  // { path: 'login', component: IodpLoginComponent },
   {
-    path: 'template-lists',
-    loadChildren: () => import('../data-capture/data-capture.module').then(m => m.DataCaptureModule),
-    canActivate: [AuthGuard]
+    path: '',
+    loadChildren: () => import('../data-capture/data-capture.module').then(m => m.DataCaptureModule)
+    // canActivate: [AuthGuard]
 }
 ];
 
