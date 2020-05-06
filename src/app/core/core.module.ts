@@ -9,13 +9,14 @@ import { IodpLoginModule } from 'iodplogin';
 import { CoreRoutingModule } from './core-routing.module';
 import { HotTableModule } from '@handsontable/angular';
 import { StartupService } from './services/startup.service';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 export function startupServiceFactory(startupService: StartupService): Function {
   return () => startupService.load();
 }
 
 @NgModule({
-  declarations: [LayoutComponent],
+  declarations: [LayoutComponent, SidebarComponent],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
@@ -26,7 +27,7 @@ export function startupServiceFactory(startupService: StartupService): Function 
     IodpLoginModule,
     CoreRoutingModule,
   ],
-  exports: [RouterModule, FormsModule, ReactiveFormsModule, HotTableModule, LayoutComponent],
+  exports: [RouterModule, FormsModule, ReactiveFormsModule, HotTableModule, LayoutComponent, SidebarComponent],
   providers: [
     StartupService, {
       provide: APP_INITIALIZER,

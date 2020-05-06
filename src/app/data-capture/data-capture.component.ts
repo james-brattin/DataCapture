@@ -14,7 +14,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./data-capture.component.scss']
 })
 export class DataCaptureComponent implements OnInit {
-  dataset = dataset;
+  data = dataset;
+  dataset;
   private hotRegisterer = new HotTableRegisterer();
   id = 'hotInstance';
   hotSettings: Handsontable.GridSettings = {
@@ -30,6 +31,7 @@ export class DataCaptureComponent implements OnInit {
 
   tableId = 'myTableInstance';
   private myRegisterer = new HotTableRegisterer();
+
   tableSettings: Handsontable.GridSettings = {
     // data: Handsontable.helper.createSpreadsheetData(151, 175),
     rowHeaders: true,
@@ -47,10 +49,10 @@ export class DataCaptureComponent implements OnInit {
     // ],
     fixedRowsTop: 1,
     columnHeaderHeight: 35,
-    height: 750,
+    height: 600,
     width: 1870,
     autoWrapRow: true,
-    maxRows: 22000,
+    maxRows: 2200,
     manualRowResize: true,
     manualColumnResize: true,
     startRows: 5,
@@ -68,20 +70,44 @@ export class DataCaptureComponent implements OnInit {
         console.log( value, row, prop)    
         alert("Invalid")
       }
+    },
+    afterScrollVertically: function() {
+      this.myRegisterer.getInstance(this.tableId).selectCell(0, 0);
+      let i = this.myRegisterer.getInstance(this.tableId).getSelectedLast()[0];
+      this.myRegisterer.getInstance(this.tableId).selectCell(i, 0);
+        i++;
+      if(this.myRegisterer.getInstance(this.tableId).getSelectedLast()[0] === 25){
+        this.myRegisterer.getInstance(this.tableId).updateSettings({
+          data: Handsontable.helper.createSpreadsheetData(60,5)
+        });
+      }
     }
   };
 
   ngOnInit() {
-    let index = 1;
-    dataset.map(column => {
-      if (index != 1) {
-        column["Domain no."] = `=ROUND((p${index}-n${index}), 4)`;
-        column["Piece no."] = `=ROUND(SQRT(p${index}), 4)`;
-        index += 1;
-      } else {
-        index += 1;
-      }
-    })
+    // let index = 1;
+    // this.dataset = this.data.map(column => {
+    //   if (index != 1) {
+    //     column["Domain no."] = `=ROUND((p${index}-n${index}), 4)`;
+    //     column["Piece no."] = `=ROUND(SQRT(p${index}), 4)`;
+    //     index += 1;
+    //   } else {
+    //     index += 1;
+    //   }
+    // });
+    this.dataset = this.data.filter(row => (row.Core >= 2 && row.Core < 10) || row.Core == "Core");
+    // this.myRegisterer.getInstance(this.tableId).addHook("afterScrollVertically", function(){
+    //   let i = this.myRegisterer.getInstance(this.tableId).getSelectedLast()[0];
+    //   this.myRegisterer.getInstance(this.tableId).selectCell(i, 0);
+    //     i++;
+      
+    //     if(this.myRegisterer.getInstance(this.tableId).getSelectedLast()[0] === 25){
+    //         console.log("next part of data");
+    //         this.myRegisterer.getInstance(this.tableId).updateSettings({
+    //       data: Handsontable.helper.createSpreadsheetData(60,5)
+    //     });
+    //   }
+    // });
   }
 
   detectChanges = (hotInstance, changes, source) => {
@@ -132,7 +158,7 @@ const contextMenu = {
       name: 'Show all columns',
       callback: function(key, selection, clickEvent) {
         const hiddenColumnsPlugin = this.getPlugin('hiddenColumns');
-        hiddenColumnsPlugin.showColumns([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]);
+        hiddenColumnsPlugin.showColumns([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]);
         this.render();
       }
     },

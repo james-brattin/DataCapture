@@ -29,7 +29,7 @@ export const columns = [
     },
     {
       data: 'Core',
-      type: 'text',
+      type: 'numeric',
       readOnly: true,
       collapsible: true,
       colWidths: 40,
@@ -113,13 +113,13 @@ export const columns = [
     {
       data: 'Domain no.',
       type: 'text',
-      readOnly: true,
+      // readOnly: true,
       colWidths: 54
     },
     {
       data: 'Piece no.',
       type: 'text',
-      readOnly: true,
+      // readOnly: true,
       colWidths: 40
     },
     {
